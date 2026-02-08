@@ -1,0 +1,68 @@
+package practice_java;
+import java.util.*;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class demo{
+	public static void main(String args[]) {
+		int[] nums = {5, 8, 3, 2, 1, 4};
+		
+		int n = nums.length;
+		
+		int evenCount = 0, oddCount = 0;
+		
+		for(int num: nums) {
+			if(num % 2 ==0) {
+				evenCount++;
+			}else {
+				oddCount++;
+			}
+		}
+		
+		int[] odd = new int[oddCount];
+		int[] even = new int[evenCount];
+		
+		int o =0, e=0;
+		
+		for(int num: nums) {
+			if(num % 2 ==0) {
+				even[e++] = num;
+				
+			}else {
+				odd[o++] = num;
+			}
+		}
+		
+		Arrays.sort(odd);
+		Arrays.sort(even);
+		
+		reverse(even);
+		
+		o=0;
+		e =0;
+		for(int i=0; i<n;i++) {
+			if(nums[i] % 2==0) {
+				nums[i] = even[e++];
+				
+			}else {
+				nums[i] = odd[o++];
+			}
+		}
+		System.out.println(Arrays.toString(nums));
+		
+		
+		}
+	static void reverse(int[] arr) {
+		int left =0, right = arr.length -1;
+		
+		while(left < right) {
+			int temp = arr[left];
+			arr[left] = arr[right];
+			arr[right] = temp;
+			left++;
+			right--;
+		}
+		
+	}
+}
