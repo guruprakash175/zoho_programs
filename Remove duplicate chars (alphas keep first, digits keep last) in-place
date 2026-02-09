@@ -1,0 +1,60 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        String s = "a1b2a3b1";
+        char[] arr = s.toCharArray();
+
+        boolean[] seenAlpha = new boolean[256];
+        boolean[] seenDigit = new boolean[256];
+
+        int n = arr.length;
+
+        // Pass 1 → Alphabets keep FIRST
+        for(int i = 0; i < n; i++){
+
+            if(Character.isLetter(arr[i])){
+
+                if(seenAlpha[arr[i]]){
+                    arr[i] = '#';        // remove duplicate
+                }
+                else{
+                    seenAlpha[arr[i]] = true; // mark seen
+                }
+            }
+        }
+
+        // Pass 2 → Digits keep LAST
+        for(int i = n-1; i >= 0; i--){
+
+            if(Character.isDigit(arr[i])){
+
+                if(seenDigit[arr[i]]){
+                    arr[i] = '#';        // remove earlier duplicate
+                }
+                else{
+                    seenDigit[arr[i]] = true; // mark seen
+                }
+            }
+        }
+
+        // Build result
+        StringBuilder result = new StringBuilder();
+
+        for(char c : arr){
+            if(c != '#'){
+                result.append(c);
+            }
+        }
+
+        System.out.println(result.toString());
+    }
+}
