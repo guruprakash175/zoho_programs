@@ -1,0 +1,41 @@
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+
+        String[] words = s.split(" ");
+
+        // Step 1: Length check
+        if(pattern.length() != words.length){
+            return false;
+        }
+
+        // Mapping arrays
+        String[] map = new String[256];
+
+        for(int i = 0; i < pattern.length(); i++){
+
+            char ch = pattern.charAt(i);
+            String word = words[i];
+
+            // If letter not mapped yet
+            if(map[ch] == null){
+
+                // Check if word already used
+                for(int j = 0; j < 256; j++){
+                    if(word.equals(map[j])){
+                        return false;
+                    }
+                }
+
+                map[ch] = word;
+            }
+            else{
+                // If mapped → must match
+                if(!map[ch].equals(word)){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
