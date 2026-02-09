@@ -1,0 +1,48 @@
+class Solution {
+    public boolean wordBreak(String s, String[] wordDict) {
+
+        int n = s.length();
+
+        // Step 1: Create DP array
+        boolean[] dp = new boolean[n + 1];
+
+        // Step 2: Empty string is always true
+        dp[0] = true;
+
+        // Step 3: Loop through string
+        for(int i = 1; i <= n; i++){
+
+            // Step 4: Check all cuts
+            for(int j = 0; j < i; j++){
+
+                // If left part is valid
+                if(dp[j] == true){
+
+                    // Take substring
+                    String sub = s.substring(j, i);
+
+                    // Check in dictionary
+                    if(isInDict(sub, wordDict)){
+                        dp[i] = true;
+                        break; // No need further
+                    }
+                }
+            }
+        }
+
+        // Final answer
+        return dp[n];
+    }
+
+    // Function to check word in dictionary
+    public boolean isInDict(String word, String[] dict){
+
+        for(int i = 0; i < dict.length; i++){
+            if(word.equals(dict[i])){
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
