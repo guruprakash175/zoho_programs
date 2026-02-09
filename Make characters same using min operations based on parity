@@ -1,0 +1,40 @@
+public class Demo {
+
+    public static void main(String[] args) {
+
+        String s = "abca";
+
+        int n = s.length();
+
+        int[] evenFreq = new int[26];
+        int[] oddFreq  = new int[26];
+
+        // Count frequency
+        for(int i = 0; i < n; i++){
+
+            char c = s.charAt(i);
+
+            if(i % 2 == 0)
+                evenFreq[c - 'a']++;
+            else
+                oddFreq[c - 'a']++;
+        }
+
+        // Find max frequency
+        int maxEven = 0, maxOdd = 0;
+
+        for(int i = 0; i < 26; i++){
+            maxEven = Math.max(maxEven, evenFreq[i]);
+            maxOdd  = Math.max(maxOdd, oddFreq[i]);
+        }
+
+        int evenPositions = (n + 1) / 2;
+        int oddPositions  = n / 2;
+
+        int operations =
+            (evenPositions - maxEven) +
+            (oddPositions  - maxOdd);
+
+        System.out.println("Min operations = " + operations);
+    }
+}
